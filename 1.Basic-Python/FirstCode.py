@@ -1,4 +1,4 @@
-"""print("Hello World")
+print("Hello World")
 print("my first code ")
 print("i am rkhan10")
 #syntax
@@ -296,8 +296,7 @@ while count<=n:
   sum=sum+count
   count=count+1
   print("sum of all natural number",sum)
-  
-"""
+
 #prime number of (1 , 100)
 
 for num in range(1,101):
