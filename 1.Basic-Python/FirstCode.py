@@ -1,4 +1,4 @@
-"""print("Hello World")
+print("Hello World")
 print("my first code ")
 print("i am rkhan10")
 #syntax
@@ -310,7 +310,7 @@ for num in range(1,101):
 
 
     print("reminder this all ")
-"""
+
 list
 lst=[]
 print(type(lst))
