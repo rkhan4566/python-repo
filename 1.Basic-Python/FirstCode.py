@@ -1,4 +1,4 @@
-print("Hello World")
+"""print("Hello World")
 print("my first code ")
 print("i am rkhan10")
 #syntax
@@ -310,3 +310,110 @@ for num in range(1,101):
 
 
     print("reminder this all ")
+"""
+list
+lst=[]
+print(type(lst))
+
+name=["rehan","rkhan",10,20,]
+print(type(name))
+print(name)
+
+##mixed list
+name=["rehan","alam","apple","3.14",True]
+print(name)
+
+#accesing list element
+fruits=["apple","banana","kiwi","mango","pomegranate"]
+print(fruits[1])
+print(fruits[0:])
+print(fruits[-1:])
+print(fruits[1:4])
+
+#m)odifying the list element
+fruits[1]="watermelon"
+print(fruits)
+
+#append, that means add new list item in the ending of the list
+fruits.append("orange")
+print(fruits)
+
+fruits.insert(1,"banana")
+print(fruits)
+
+fruits.remove("banana")
+print(fruits)
+
+#remove and return of the last element
+popped_fruits=fruits.pop()
+print(popped_fruits)
+
+index=fruits.index("apple")
+print(index)
+
+fruits.insert(3,"apple")
+print(fruits.count("apple"))
+print(fruits)
+
+#sort() helps to arrnage in accending order
+fruits.sort()
+print(fruits)
+
+#decending order by reverse () method
+fruits.reverse()
+print(fruits)
+
+#remove all item in list by clear() method
+fruits.clear()
+print(fruits)
+
+#silicing method
+numbers=[1,2,3,4,5,6,7,8,9,10]
+print(numbers[2:5])
+print(numbers[:5])
+print(numbers[5:])
+print(numbers[::2])
+print(numbers[::-1]) 
+print(numbers[::3])
+
+#iternating over list
+for number in numbers:
+    print(number)
+
+for index,number in enumerate(numbers):
+    print(index,number)
+
+#list comprehensive
+lst=[]
+for x in range(10):
+    lst.append(x**2)
+    print(lst)
+
+
+#basic list comprehensive
+lst = [x**2 for x in range(10)]
+print(lst)
+
+cube=[x**3 for x in range(10)]
+print(cube)
+
+#list comprehensive with condition
+lst=[]
+for i in range(10):
+    if i%2==0:
+        lst.append(i)
+        print(lst)
+
+even_list=[num for num in range(10) if num%2==0]
+print(even_list)
+
+#nested comprehension
+lst1=[1,2,3,4]
+lst2=['a','b','c','d']
+pair=[[i,j]for i in lst1 for j in lst2]
+print(pair)
+
+#list comphensive
+words=["hello","world","rehanalam","nested"]
+length=[len(word) for word in words]
+print(length)
