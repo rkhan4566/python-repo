@@ -1,73 +1,87 @@
-#tuples
-#create a empty tuples
-numbers=1,2,3,4,5,6
-empty_tuple=()
-print(empty_tuple)
-print(type(empty_tuple))
+#sets:-sets are a build in data type in python used to store in unique colletion of items.
+#  sets are unorderd elements that meaans do not follow a specific order and do not allow duplicate element
 
-lst=list()
-print(type(lst))
-tpl=tuple()
-print(type(tpl))
+my_sets={1,2,3,4}
+print(type(my_sets))
+print(my_sets)
 
-mixed_tuple=(1,2,"rehan",3.14)
-print(mixed_tuple)
+my_empty_sets=set()
+print(my_empty_sets)
+print(type(my_empty_sets))
 
-#silicing and accessing index are similar as list 
-#operation of tuples
-concatenation_tuples=numbers+mixed_tuple
-print(concatenation_tuples)
+my_empty_sets=set([1,2,3,4,5,6])
+print(my_empty_sets)
 
-mixed_tuple * 3
-print(mixed_tuple)
+#basic sets operations
+#adding and removing elements
+my_sets.add(7)
+print(my_sets)
 
-#tuples are immutable
-numbers=1,2,3,4,5,6
-numbers=[2]="krish"
-print(numbers)
+my_sets.remove(7)
+print(my_sets)
 
-#tuples method
-numbers=1,2,3,4,5,6
-print(numbers.count(1))
-print(numbers.index(4))
+#diacard is a method to remove to set item if it is present else not present it doesnot get any error
+# thats means discard helps to check the element will present or not
+my_sets.discard(3)
+print(my_sets)
 
-#packing and unpcking tuples
-#packing
-packed_tuple=(1,2,"rehan",4,3.14)
-print(packed_tuple)
+##pop method:-thats method helps to remove first element and also show specific removing element
+removed_element=my_sets.pop()
+print(removed_element)
+print(my_sets)
 
+#clear all element
+my_sets.clear()
+print(my_sets)
 
-#unpacked tuples
-packed_tuple=(1,2,"rehan",4,3.14)
-a,b,c,d,e=packed_tuple
-print(a)
-print(b)
-print(c)
-print(d)
-print(e)
+#set membership test
+my_sets={1,2,3,4,5,6}
+print(3 in my_sets)
+print(8 in my_sets)
 
-#unpacked tuples with *
-numbers=(1,2,3,4,5,6)
-first,*middle,last=numbers
-print(first)
-print(*middle)
-print(last)
+##mathematical operation
+set1={1,2,3,4,5,6}
+set2={3,4,5,6,7,8}
 
-#nested tuple
-#nested list
-lst=[[1,2,3],[4,5,6],[7,"rehan",3.14]]
-lst[0:1]
-print(lst)
+#union:-means add to each other without common element in same row
+union_set=set1.union(set2)
+print(union_set)
 
-#access the elements inside a tuple
-nested_tuple=[[1,2,3],[4,5,6],[3.14,"rehan","c"]]
-print(nested_tuple[0])
-print(nested_tuple[2][2])
+#intersection set:- means shows commom element thst show in different row
+intersection_set=set1.intersection(set2)
+print(intersection_set)
 
-#iterate over nested tuple
-nested_tuple=[[1,2,3],[4,5,6],[3.14,"rehan","c"]]
-for sub_tuple in nested_tuple:
-    for item in sub_tuple:
-        print(item," ")
-        print()
+##intersection update
+set1.intersection_update(set2)
+print(set1)
+
+#difference 
+set1={1,2,3,4,5,6}
+set2={3,4,5,6,7,8}
+print(set1.difference(set2))
+
+#symmertric difference
+set1.symmetric_difference(set2)
+print(set1)
+
+set2.symmetric_difference(set1)
+print(set2)
+
+#issubset and issuperset:-means all elements of set1 are present in set2 that show true either false
+print(set1.issubset(set2))
+print(set1.issuperset(set2))
+
+#how to convert from any to sets
+lst_element=[1,2,3,4,4,5,6,6,7,7,7,7]
+set_element=set(lst_element)
+print(set_element)
+
+##convert list of word to set to get unique word
+text="this is the property of rkhan"
+words=text.split()
+
+unique_word=set(words)
+print(unique_word)
+print(len(unique_word))
+
 
