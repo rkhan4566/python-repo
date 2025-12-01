@@ -1,312 +1,63 @@
-"""print("Hello World")
-print("my first code ")
-print("i am rkhan10")
-#syntax
-a=1
-b=2
-sum=a+b
-print(sum)
-total=1+2+3+4+5+6+7+8
-print(total)
-a=1;b=2;x=a+b
-print(x)
-name="rehan"
-age=19
-print(type(name))
-print(type(age))
-##indentation
-age=20
-if age>19:
-    print("true")
-else:
-    print("false")
-##that is comment when we use double ## and ''''''
-name="rehan"
-age=19
-height="5.8"
-print("name:",name)
-print("age:",age)
-print("height:",height)
-#type conversion
-age=19
-print(type(age))
+#dictionaries
+#dictionaries are unorderd collection item they store data in key value pairs.
+# keys must be unique and immutable(eg:-string number or tuples)while value can be on any type
 
-age_str=str(age)
-print(age_str)
-print(type(age_str))
+#creating a empty dictionaries
+empty_dict={}
+print(type(empty_dict))
 
-height=5.8
-print(int(height))
-print(float(height))
+#single key always used
+student={"name":"rehan","age":"19","height":"5.8"}
+print(student)
 
- #dynamic type
-var=10
-print(var,type(var))
-var="rehan"
-print(var,type(var))
-var=6.0
-print(var,type(var))
+#accesing dictionary element
+print(student["age"])
+print(student["name"])
+print(student["height"])
 
-#input
-name=str(input("what is your name"))
-print(name,type(name))
+#also accessing using get()
+print(student.get("name"))
+print(student.get("rehan")) ##none value
 
-age=int(input("what is your age"))
-print=(age,type(age))
+#dictionaries are modifying element
+#dictionaries are mutable item so i you can add and update or delete elements
 
-#simple calculaator
-num1=float(input("entre your number"))
-num2=float(input("entre your number"))
+student["age"]=19 #it helps to update value
+print(student)
+student["address"]="ranchi" # it can used to add value
+print(student)
 
-add=num1+num2
-difference=num1-num2
-product=num1*num2
-quotient=num1/num2
+#del - it helps to delete keys and pair value
+del student["name"]
+print(student)
 
-print(add,"addition")
-print(difference,"diff")
-print(product,"mul")
-print(quotient,"divide")
+#dictionaries method
+keys=student.keys()
+print(keys)
 
-#integer data types
-age=32
-print(type(age))
+values=student.values()
+print(values)
 
-#float value data type
-height=5.8
-print(type(height))
+items=student.items()
+print(items)
 
-#string data types
-name="rehan"
-print(type(name))
+#shallow copy
+student_copy=student
+print(student)
+print(student_copy)
 
-#boolean data types
-is_true=True
-print(type(is_true))
+student["name"]="rehan1"
+print(student)
+print(student_copy)
 
-a=10
-b=10
-print(type(a==b))
+student["name"]="rehan2"
+print(student)
+print(student_copy)
 
-a=Rkhan+str(10)
-print(a)
+student_copy1=student.copy()
+print(student_copy1)
+print(student)
 
-#Arithmetic operation
-a=10
-b=5
-add_result=a+b #addition
-sub_result=a-b #substraction
-mul_result=a*b #multiplication
-div_result=a/b #division
-floor_div_result=a//b #floordivision
-modulus_result=a%b #modulus
-exponent_result=a**b #exponential
-
-print(add_result)
-print(sub_result)
-print(mul_result)
-print(div_result)
-print(floor_div_result)
-print(modulus_result)
-print(exponent_result)
-
-
-#comparison operator
-a=10
-b=10
-result=a==b
-print(result)
-
-
-#not equal value
-str1=("rehan")
-str2=("Rehan")
-result=str1!=str2
-print(result)
-
-#greater than less than and equal to
-a=5
-b=6
-result=a>b
-print(result)
-
-a=5
-b=4
-result=a>b
-print(result)
-
-a=6
-b=6
-result=a==b
-print(result)
-
-
-#AND OR and NOT logic operator
-a=True
-b=False
-result=a and b
-print(result)
-
-a=True
-b=False
-result=a or b
-print(result)
-
-a=True
-result= not a
-print(result)
-
-#simple calculator
-num1=float(input("entre your first number"))
-num2=float(input("entre your second number"))
-
-addition=num1+num2
-substraction=num1-num2
-multiplication=num1*num2
-divide=num1/num2
-floor_division=num1//num2
-modulus=num1%num2
-exponential=num1**num2
-
-print("Add=",addition)
-print("Sub=",substraction)
-print("mul=",multiplication)
-print("div=",divide)
-print("fl div=",floor_division)
-print("mod=",modulus)
-print("exp=",exponential)
-
-
-#conditonal statements
-age=int(input("entre your age="))
-
-if age<=13:
-    print("you are a child")
-elif age<18:
-    print("you are not eligible for vote")
-else:
-    print("you are eligible for vote")
-
-num=int(input("entre your number"))
-
-if num%2==0:
-    print("it is an even number")
-else:
-    print("it is an odd number")
-   
-
-#using nested condition
-year=int(input("entre year:"))
-if year%4==0:
-    if year%100==0:
-        if year%400==0:
-           print(year,"it is a leap year")
-        else:
-            print(year,"it is not a leap year") 
-    else:
-        print(year,"it is a leap year")
-else:
-    print(year,"it is not a leap year")
-
-
-#simple calculator
-num1=int(input("entre your number"))
-num2=int(input("entre your number"))
-operation=input("entre operation(+,-,*,/):")
-
-if operation == '+':
-    result= num1+num2
-elif operation == '-':
-    result= num1-num2
-elif operation == '*':
-    result= num1*num2
-elif operation == "/":
-    result= num1/num2
-    if num2 !=0:
-        result=num1/num2
-
-    else:
-        result="invalid operation"
-else:
-    result= "error division by zero"
-print(result)
-
-# for loop
-
-range(5)
-print(range)
-
-for i in range (5):
-    print(i)
-
-for i in range(1,10):
-    print(i)
-
-for i in range(1,10,2):
-    print(i)
-
-
-#while loop
-count=0
-while count<5:
-    count=count+1
-    print(count)
-
-count=0
-while count<100:
-    count=count+1
-    print(count)
-
-for i in range(10):
-   if i==5:
-    break
-   print(i)
-
-
-for i in range(100):
-   if i==25:
-      break
-   print(i)
-
-#pass null statement
-for i in range(5):
-   if i==4:
-    print("the null number",i)
-    pass
-   print( i)
-
-#nested loop
-#in loop inside a loop
-
-for i in range(5):
-  for j in range(4):
-    print(f"i:{i} and j:{j}")
-    
-n=10
-sum=0
-for i in range(11):
-   sum=sum+i
-print(sum)
-
-n=10
-sum=0
-count=1
-
-while count<=n:
-  sum=sum+count
-  count=count+1
-  print("sum of all natural number",sum)
-  
-"""
-#prime number of (1 , 100)
-
-for num in range(1,101):
-    if num>1:
-        for i in range(2,num):
-            if num%i==0:
-                break
-        else:
-            print(num)
-
-
- 
+student["name"]="rehan3"
+print(student)
+print(student_copy1)
