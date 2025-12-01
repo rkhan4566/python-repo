@@ -1,87 +1,63 @@
-#sets:-sets are a build in data type in python used to store in unique colletion of items.
-#  sets are unorderd elements that meaans do not follow a specific order and do not allow duplicate element
+#dictionaries
+#dictionaries are unorderd collection item they store data in key value pairs.
+# keys must be unique and immutable(eg:-string number or tuples)while value can be on any type
 
-my_sets={1,2,3,4}
-print(type(my_sets))
-print(my_sets)
+#creating a empty dictionaries
+empty_dict={}
+print(type(empty_dict))
 
-my_empty_sets=set()
-print(my_empty_sets)
-print(type(my_empty_sets))
+#single key always used
+student={"name":"rehan","age":"19","height":"5.8"}
+print(student)
 
-my_empty_sets=set([1,2,3,4,5,6])
-print(my_empty_sets)
+#accesing dictionary element
+print(student["age"])
+print(student["name"])
+print(student["height"])
 
-#basic sets operations
-#adding and removing elements
-my_sets.add(7)
-print(my_sets)
+#also accessing using get()
+print(student.get("name"))
+print(student.get("rehan")) ##none value
 
-my_sets.remove(7)
-print(my_sets)
+#dictionaries are modifying element
+#dictionaries are mutable item so i you can add and update or delete elements
 
-#diacard is a method to remove to set item if it is present else not present it doesnot get any error
-# thats means discard helps to check the element will present or not
-my_sets.discard(3)
-print(my_sets)
+student["age"]=19 #it helps to update value
+print(student)
+student["address"]="ranchi" # it can used to add value
+print(student)
 
-##pop method:-thats method helps to remove first element and also show specific removing element
-removed_element=my_sets.pop()
-print(removed_element)
-print(my_sets)
+#del - it helps to delete keys and pair value
+del student["name"]
+print(student)
 
-#clear all element
-my_sets.clear()
-print(my_sets)
+#dictionaries method
+keys=student.keys()
+print(keys)
 
-#set membership test
-my_sets={1,2,3,4,5,6}
-print(3 in my_sets)
-print(8 in my_sets)
+values=student.values()
+print(values)
 
-##mathematical operation
-set1={1,2,3,4,5,6}
-set2={3,4,5,6,7,8}
+items=student.items()
+print(items)
 
-#union:-means add to each other without common element in same row
-union_set=set1.union(set2)
-print(union_set)
+#shallow copy
+student_copy=student
+print(student)
+print(student_copy)
 
-#intersection set:- means shows commom element thst show in different row
-intersection_set=set1.intersection(set2)
-print(intersection_set)
+student["name"]="rehan1"
+print(student)
+print(student_copy)
 
-##intersection update
-set1.intersection_update(set2)
-print(set1)
+student["name"]="rehan2"
+print(student)
+print(student_copy)
 
-#difference 
-set1={1,2,3,4,5,6}
-set2={3,4,5,6,7,8}
-print(set1.difference(set2))
+student_copy1=student.copy()
+print(student_copy1)
+print(student)
 
-#symmertric difference
-set1.symmetric_difference(set2)
-print(set1)
-
-set2.symmetric_difference(set1)
-print(set2)
-
-#issubset and issuperset:-means all elements of set1 are present in set2 that show true either false
-print(set1.issubset(set2))
-print(set1.issuperset(set2))
-
-#how to convert from any to sets
-lst_element=[1,2,3,4,4,5,6,6,7,7,7,7]
-set_element=set(lst_element)
-print(set_element)
-
-##convert list of word to set to get unique word
-text="this is the property of rkhan"
-words=text.split()
-
-unique_word=set(words)
-print(unique_word)
-print(len(unique_word))
-
-
+student["name"]="rehan3"
+print(student)
+print(student_copy1)
