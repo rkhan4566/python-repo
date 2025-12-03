@@ -1,122 +1,81 @@
-#dictionaries
-#dictionaries are unorderd collection item they store data in key value pairs.
-# keys must be unique and immutable(eg:-string number or tuples)while value can be on any type
+#manage a to do list
+#create a to do list to keep track off task
 
-#creating a empty dictionaries
-empty_dict={}
-print(type(empty_dict))
+to_do_list=["buy groceries","clean house","pay bills"]
+#adding task
+to_do_list.append("schedule meeting")
+to_do_list.append("go for run")
 
-#single key always used
-student={"name":"rehan","age":"19","height":"5.8"}
-print(student)
+#remove a completed task
+to_do_list.remove("clean house")
 
-#accesing dictionary element
-print(student["age"])
-print(student["name"])
-print(student["height"])
+#checking if a task is in a list
+if "pay bills" in to_do_list:
+    print("don't forget utility bills")
 
-#also accessing using get()
-print(student.get("name"))
-print(student.get("rehan")) ##none value
+print("to do list remaining")
+for task in to_do_list:
+    print(f"-{task}")
 
-#dictionaries are modifying element
-#dictionaries are mutable item so i you can add and update or delete elements
+#organizing student grades
+grades=[99,98,97,96,94,93]
 
-student["age"]=19 #it helps to update value
-print(student)
-student["address"]="ranchi" # it can used to add value
-print(student)
+#adding a new grade
+grades.append(95)
 
-#del - it helps to delete keys and pair value
-del student["name"]
-print(student)
+#calculating the average of grade
+avg_grades=sum(grades)/ len(grades)
+print(f"avg_grades:{avg_grades:.2f}")
 
-#dictionaries method
-keys=student.keys()
-print(keys)
+#finding a highest and lowest grades
+highest_grade=max(grades)
+lowest_grade=min(grades)
+print(f"highest grades:{highest_grade}")
+print(f"minimum_grades:{lowest_grade}")
 
-values=student.values()
-print(values)
 
-items=student.items()
-print(items)
 
-#shallow copy
-student_copy=student
-print(student)
-print(student_copy)
+#use a list to manage inventoty items
+#managing a inventory
+inventory=["apples","banana","guava","litchi"]
 
-student["name"]="rehan1"
-print(student)
-print(student_copy)
+#adding a new item in inventory
+inventory.append("strawberry")
 
-student["name"]="rehan2"
-print(student)
-print(student_copy)
+#removing a out of stock item
+inventory.remove("banana")
 
-student_copy1=student.copy()
-print(student_copy1)
-print(student)
+#check item if an is in a stock
+item="apple"
+if item in inventory:
+    print(f"{item} are out of stock.")
+else:
+    print(f"{item} are in there stock.")
 
-student["name"]="rehan3"
-print(student)
-print(student_copy1)
+print("inventory list")
+for item in inventory:
+    print(f"-{item}")
 
-#itersting over dictionaries
-#you can use to loop to iterate over dictionaries,keys ,values or items
 
-#iterating over keys
-for keys in student.keys():
-    print(keys)
+#use a list to analyze your feedback
+#collecting your feedback
+feedback=["great service","full satisfied","perfect teaching","excellent work"]
 
-#iterate over values
-for value in student.keys():
-    print(values)
+#adding a new feedback
+feedback.append("not happy with the services")
 
-#iterating over key value pairs
-for keys,values in student.items():
-    print(f"{keys}:{values}")
+#counting a specific feedback
+positive_feedback_count= sum(1 for comment in feedback if "great" in comment.lower() or "excellent" in comment.lower())
 
-#nested dictionaries
-students={
-    "student1":{"name":"rehan","age":19,"height":5.8},
-    "student2":{"name":"sohail","age":19,"height":5.7}
-}
-print(students)
+print(f"positive feedback count: {positive_feedback_count}")
 
-#access nested dictionaries elements
-print(students["student2"]["age"])
-print(students["student2"]["height"])
+print("user feedback:")
+for comment in feedback:
+    print(f"-{comment}")
 
-#iterating over nested dictionaries
-for student_id,student_info in students.items():
-    print(f"{student_id}:{student_info}")
-    for keys,values in student_info.items():
-        print(f"{keys}:{values}")
 
-#dictionaries comprehension
-student={x:x**2 for x in range(6)}
-print(student)
 
-#conditon dictionaries comprehension
-even={x:x**2 for x in range(10) if x%2==0}
-print(even)
 
-### SOME PRACTICAL EXAMPLES
-#use a dictionaries to count it frrequency of element in list
 
-numbers=[1,2,2,3,3,3,4,4,4,4]
-frequency={}
 
-for number in numbers:
-    if number in frequency:
-        frequency[number]+1
-    else:
-        frequency[number]=1
-print(frequency)
 
-#merge two dictionaries into one
-dict1={"a":1,"b":2}
-dict2={"a":3,"c":4}
-merge_dict={**dict1,**dict2}
-print(merge_dict)
