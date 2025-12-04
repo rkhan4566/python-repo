@@ -1,81 +1,74 @@
-#manage a to do list
-#create a to do list to keep track off task
+#functions
+# A functions is a block of code that soecific task. help in organising code reuse code and impeove readability
 
-to_do_list=["buy groceries","clean house","pay bills"]
-#adding task
-to_do_list.append("schedule meeting")
-to_do_list.append("go for run")
+def function_name(parameter):
+    """docstring"""
+    #function body"
+    return expression
 
-#remove a completed task
-to_do_list.remove("clean house")
-
-#checking if a task is in a list
-if "pay bills" in to_do_list:
-    print("don't forget utility bills")
-
-print("to do list remaining")
-for task in to_do_list:
-    print(f"-{task}")
-
-#organizing student grades
-grades=[99,98,97,96,94,93]
-
-#adding a new grade
-grades.append(95)
-
-#calculating the average of grade
-avg_grades=sum(grades)/ len(grades)
-print(f"avg_grades:{avg_grades:.2f}")
-
-#finding a highest and lowest grades
-highest_grade=max(grades)
-lowest_grade=min(grades)
-print(f"highest grades:{highest_grade}")
-print(f"minimum_grades:{lowest_grade}")
-
-
-
-#use a list to manage inventoty items
-#managing a inventory
-inventory=["apples","banana","guava","litchi"]
-
-#adding a new item in inventory
-inventory.append("strawberry")
-
-#removing a out of stock item
-inventory.remove("banana")
-
-#check item if an is in a stock
-item="apple"
-if item in inventory:
-    print(f"{item} are out of stock.")
+#why function is essential
+num=24
+if num%2==0:
+    print("this is even number")
 else:
-    print(f"{item} are in there stock.")
+    print("this is odd number")
 
-print("inventory list")
-for item in inventory:
-    print(f"-{item}")
+def even_or_odd(num):
+    if num%2==0:
+        print("this is evens number")
+    else:
+        print("this is odds number")
+#call this function
+even_or_odd(23)
+even_or_odd(32)
 
+#function with multiple parameters
+def add(a,b):
+    return a+b
+result=add(2,4)
+print(result)
 
-#use a list to analyze your feedback
-#collecting your feedback
-feedback=["great service","full satisfied","perfect teaching","excellent work"]
+result=add(3,5)
+print(result)
 
-#adding a new feedback
-feedback.append("not happy with the services")
+#substaction
+def sub(a,b):
+    return a-b
+result=sub(4,1)
+print(result)
 
-#counting a specific feedback
-positive_feedback_count= sum(1 for comment in feedback if "great" in comment.lower() or "excellent" in comment.lower())
+#defult parameters
+def greet(name):
+    print(f"hello {name} welcome to the paradise")
+greet("rehan")
+def greet(name):
+    print(f"hello {name} you are professional player")
+greet("Rkhan10")
 
-print(f"positive feedback count: {positive_feedback_count}")
+#variable length arguments
+#positional and keywords arguments
 
-print("user feedback:")
-for comment in feedback:
-    print(f"-{comment}")
+#positional statement
+def print_numbers(*args):
+    for number in args:
+        print(number)
+print_numbers(1,2,3,4,5,6,7,8,9,"rakib")       
 
+###keywords arguments
+def print_details(**kwargs):
+    for key,value in kwargs.items():
+        print(f"{key}:{value}")
+print_details(name="rehan",age="19",country="india")
 
+def print_details(*args,**kwargs):
+    for val in args:
+        print(f"posotional arguments : {val}")
+    for key,value in kwargs.items():
+            print(f"{key}:{value}")
+print_details(1,2,3,4,"rehan",name="rehan",age="19",country="india")           
 
+def multiply(a,b):
+    return a*b
 
-
-
-
+multiply=(2*3)
+print(multiply)
