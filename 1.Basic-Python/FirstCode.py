@@ -2,7 +2,7 @@
 # A functions is a block of code that soecific task. help in organising code reuse code and impeove readability
 
 def function_name(parameter):
-    """docstring"""
+    ###docstring###
     #function body"
     return expression
 
@@ -72,3 +72,48 @@ def multiply(a,b):
 
 multiply=(2*3)
 print(multiply)
+
+##temperature conversion
+def convert_temperature(temp,unit):
+    if unit=='c':
+        return temp *9/5 + 32
+    elif unit=='f':
+        return (temp-32)*5/9
+    else:
+        return None
+
+print(convert_temperature(25 ,'c'))     
+print(convert_temperature(77, 'f'))
+
+##password strong checker
+##this function have to check the password is strong or not##
+def is_strong_password(password):
+    if len(password)<8:
+        return False
+    if not any(char.isdigit() for char in password):
+        return False
+    if not any(char.isupper() for char in password):
+        return False
+    if not any(char.islower() for char in password):
+        return False
+    if not any(char in '!@#$%&' for char in password):
+        return False
+    return True
+
+print(is_strong_password("Rehanr0#"))
+
+##calculate the total cost of item in a shopping cart
+
+def calculate_total_cost(cart):
+    total_cost=0
+    for item in cart:
+        total_cost+=item['price']* item['quantity']
+    return total_cost
+
+cart=[
+        {'name':'apple','price':20,'quantity':10},
+        {'name':'banana','price':5,'quantity':6},
+        {'name':'orange','price':40,'quantity':4}
+    ]
+print("total_cost:",calculate_total_cost(cart))
+
