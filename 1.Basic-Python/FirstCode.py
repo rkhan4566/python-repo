@@ -1,43 +1,40 @@
-#lamda functions in python
-# lamda functions are small anonynus function define using lamda function keyword.they can have any number of arguments but only one expressions.
-#they are commonly used for short operations or as arguments to higher order function
+#map:- the map() functions applies a given function to all items in an input list(or any other iterable)
+#and returns a map object (an iterator).this is particularly useful for transforming data in a list comprehensively
 
-#THIS IS SIMPLE DEFINITION FUNCTION
-def addition(a,b):
-    return a+b
-print(addition(2,5))
+def square(num):
+    return num*num
+print(square(10))
 
-#THIS IS LAMBDA FUNCTION
-addition= lambda a,b:a+b
-print(addition(2,5))
+numbers=[1,2,3,4,5,6,7,8]
+result=list(map(square,numbers))
+print(result)
 
+#lambda functions with map
+numbers=[1,2,3,4,5,6,7,8]
+result=list(map(lambda x:x*x,numbers))
+print(result)
 
-#def
-def even(num):
-    if num%2==0:
-        return True
-    else:
-        False
-print(even(44))    
-print(even(45))
-#lambda
-even1=lambda num:num%2==0
-print(even1(12))
+#map multiple iterables
+numbers1=[1,2,3]
+numbers2=[4,5,6]
+added_numbers=list(map(lambda x,y:x+y,numbers1,numbers2))
+print(added_numbers)
 
+#map() to convert a list of string to integers
+#use map to convert string to integer
+str_numbers=['1','2','3','4','5','6']
+int_numbers=list(map(int,str_numbers))
+print(int_numbers)
 
-#def
-def addition (x,y,z):
-    return x+y+z
-print(addition(4,5,6))
-#lambda
-addition1=lambda x,y,z:x+y+z
-print(addition(4,5,6))
+words=['apple','banana','orange',]
+upper_word=list(map(str.upper,words))
+print(upper_word)
 
-#square of list of items
-numbers=[1,2,3,4,5,6]
-def square(numbers):
-    return numbers**2
-print(square(6))
-#using lambda
-result=list(map(lambda x:x**2,numbers))
+def get_person(person):
+    return person['name']
+people=[
+    {'name':'rehan','age':'19'},
+    {'name':'rkhan','age':'22'}
+]
+result=list(map(get_person,people))
 print(result)
