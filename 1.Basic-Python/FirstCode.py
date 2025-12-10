@@ -16,3 +16,15 @@ print(result)
 from math import *
 result1=sqrt(25)
 print(result1)
+
+from package.maths import addition
+result=addition(2,4)
+print(result)
+
+from package.maths import substraction
+result=substraction(4,2)
+print(result)
+
+from package.maths import multiplication
+result=multiplication(4,2)
+print(result)
