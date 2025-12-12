@@ -1,73 +1,29 @@
-# STANDARD LIBRARY OVERVIEW:-
-"""python library is vast collection of modules and packages that comes bundled with python,
-   providing a wide range of functionalities out of the box. here's an overview of the sum of the most commonly
-   used modules and packages in the python standard libraries."""
+########file operation- read and write lines#######
+# ** file handling is a crucial part of programming language.python provied built in functions and method
+#   and methods to read from and write to files,both text and binary.this lesson will cover thr basics of file handling,
+#    incluiding reading and writing text files and binary files.
 
 
-import array 
-arr=array.array('i',[1,2,3,4,5,6])
-print(arr)
+#read a whole file
+"""with open('sample.txt','r')as file:
+    content=file.read
+    print(content)"""
 
-import random
-print(random.randint(1,20))
-print(random.choice(['apple','banana','cherry']))
+with open(r"D:\AI-ML-FOLDER\1.Basic-Python\sample.txt", "r") as file:
+    print(file.read())
 
-import os
-print(os.getcwd())
+#read a file with line by line
+with open (r"D:\AI-ML-FOLDER\1.Basic-Python\sample.txt", "r")as file:
+    for line in file:
+        print(line.strip()) #strip remove the new line characteristics
 
-###  os.mkdir('test_dir')
-"""
-high level operations on files and collection on files
+#write a file with overwriting
+with open(r"D:\AI-ML-FOLDER\1.Basic-Python\sample.txt", "w")as file:
+    file.write('hello world\n')
+    file.write('hello brother')
 
-import shutil
-shutil.copyfile('sample.txt','desination.txt')
-"""
-#datetime
-from datetime import datetime,timedelta
-now=datetime.now()
-print(now)
+#write a file without overwriting
+with open (r"D:\AI-ML-FOLDER\1.Basic-Python\sample.txt", "a")as file:
+    file.write("append a new sentences!/n")
 
-yesterday=now-timedelta(days=1)
-print(yesterday)
-
-#time
-import time
-print(time.time())
-
-time.sleep(2)
-print(time.time())
-
-#regular expression
-import re
-pattern=r'\d+'
-text='there are 123 apples are present in there'
-match=re.search(pattern,text)
-print(match.group())
-
-#data seialization
-import json
-data={'name':'rehan','age':19}
-json_str=json.dumps(data)
-print(json_str)
-print(type(json_str))
-
-paresed_data=json.loads(json_str)
-print(paresed_data)
-print(type(paresed_data))
-
-#csv 
-import csv
-with open('example.csv',mode='w',newline='')as file:
-    writer=csv.writer(file)
-    writer.writerow(['name','age'])
-    writer.writerow(['rehan',19])
-
-with open('example.csv',mode='r')as file:
-    reader=csv.reader(file)
-    for row in reader:
-        print(row)    
-
-#Conclusion
-
-#Python’s Standard Library is very powerful and provides tools for almost any task—from file handling and web services to data serialization and concurrent execution.
-# By understanding and using the available modules and packages, you can greatly improve your ability to write efficient and effective Python programs.
+    
