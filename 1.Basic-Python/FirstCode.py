@@ -5,9 +5,9 @@
 
 
 #read a whole file
-"""with open('sample.txt','r')as file:
+with open('sample.txt','r')as file:
     content=file.read
-    print(content)"""
+    print(content)
 
 with open(r"D:\AI-ML-FOLDER\1.Basic-Python\sample.txt", "r") as file:
     print(file.read())
@@ -68,9 +68,57 @@ with open ('sample.txt','w+')as file:
     file.write('hello world\n')
     file.write('this is my new line\n')
 
-    """#move the file cursor to the begining
-    file.seek(0)"""
+    #move the file cursor to the begining
+    file.seek(0)
 
     #read the content of the file 
     content.file.read()
     print(content)
+
+#create a new directory
+import os
+cwd=os.getcwd()
+print(f"current working directory is {cwd}")
+
+new_directory="package"
+os.mkdir(new_directory)
+print(f"directory'{new_directory}'create")
+
+#listing file and directies
+items=os.listdir('.')
+print(items)
+
+#joining paths
+dir_name="folder"
+file_name="file.txt"
+full_path=os.path.join(dir_name,file_name)
+print(full_path)
+
+#joining file with same directory
+dir_name="folder"
+file_name="file.txt"
+full_path=os.path.join(os.getcwd(),dir_name,file_name)
+print(full_path)
+
+#check the path is exists
+path='example.csv'
+if os.path.exists(path):
+    print(f"the path '{path}' is exists")
+else:
+    print(f"the path '{path}' does not exists")
+
+#checking if path is a file or directory
+import os
+path='example.bin'
+if os.path.isfile(path):
+    print(f"the path '{path}' is a file.")
+elif os.path.isdir(path):
+    print(f"the path '{path}' is a directory.")
+else:
+    print(f"the path '{path}' is neither a file or directory.")
+
+#getting a absolute path
+relative_path='example.txt'
+absolute_path=os.path.abspath(relative_path)
+print(absolute_path)
+
