@@ -1,124 +1,82 @@
-########file operation- read and write lines#######
-# ** file handling is a crucial part of programming language.python provied built in functions and method
-#   and methods to read from and write to files,both text and binary.this lesson will cover thr basics of file handling,
-#    incluiding reading and writing text files and binary files.
+####  Understanding Exceptions  ###
+#Exception handling in Python allows you to handle errors gracefully and take corrective actions without stopping the execution of the program. This lesson will cover the basics of exceptions, including how to use try, except, else, and finally blocks.
 
+#What Are Exceptions?
+#Exceptions are events that disrupt the normal flow of a program. They occur when an error is encountered during program execution. Common exceptions include:
 
-#read a whole file
-with open('sample.txt','r')as file:
-    content=file.read
-    print(content)
+#  1.  ZeroDivisionError: Dividing by zero.
 
-with open(r"D:\AI-ML-FOLDER\1.Basic-Python\sample.txt", "r") as file:
-    print(file.read())
+#  2.  FileNotFoundError: File not found.
 
-#read a file with line by line
-with open (r"D:\AI-ML-FOLDER\1.Basic-Python\sample.txt", "r")as file:
-    for line in file:
-        print(line.strip()) #strip remove the new line characteristics
+#  3. ValueError: Invalid value.
 
-#write a file with overwriting
-with open(r"D:\AI-ML-FOLDER\1.Basic-Python\sample.txt", "w")as file:
-    file.write('hello world\n')
-    file.write('hello brother')
+#  4. TypeError: Invalid type.
 
-#write a file without overwriting
-with open (r"D:\AI-ML-FOLDER\1.Basic-Python\sample.txt", "a")as file:
-    file.write("append a new sentences!/n")
+#try and except block
+try:
+    a=b
+except:
+    print("the variable has not be assigned")
 
-#writing a list of a line    
-lines=('firstline\n','secondline\n','thirdline\n')
-with open('sample.txt','a')as file:
-    file.writelines(lines)
+try:
+    a=b
+except NameError as ex:
+    print(ex)
 
-#writing to a binary file
-data=b'\x00\x01\x02\x03\x04'
-with open('example.bin','wb')as file:
-    file.write(data)
+try:
+    result=1/0
+except ZeroDivisionError as ex:
+    print(ex)
+    print('entre the denominator is greater than zero')
+    
+try:
+    result=1/2
+    a=b
+except ZeroDivisionError as ex:
+    print(ex)
+except Exception as ex1:
+    print(ex1)
+    print('main exception get caught here')
+     
+#input method by try,except,else 
+try:
+    num=int(input("enter a number "))
+    result=10/num
+except ValueError:
+    print("this is not a valid error")
+except ZeroDivisionError:
+    print("entre denominator greater than zero")
+except Exception as ex:
+    print(ex)
+else:
+    print(f"the result is {result}")
 
-#reading a binary file
-with open ('example.bin','rb')as file:
+#try,except,else and finally blocks
+try:
+    num=int(input("enter a number "))
+    result=10/num
+except ValueError:
+    print("this is not a valid error")     
+except ZeroDivisionError:
+    print("you can't divided by zero")
+except Exception as ex:                     #except block is work when error will get found
+    print(ex)
+else:                                       #else is work when no error will be found
+    print(f"the result is {result}")  
+finally:
+    print("execution complete.")             #finally block works both in except and else 
+
+#file handling and exception handling
+try:
+    file=open('example.txt','r')
     content=file.read()
-    print(content) 
-
-#read the content from a source text file and write to a destination file 
-
-with open('sample.txt','r') as source_file:
-    content=source_file.read()
-
-with open('destination.txt','w')as destination_file:
-    destination_file.write(content)
-
-#read a text file and count the number of lines words and characters.
-def count_text_file(file_path):
-    with open(file_path, 'r') as file:
-        lines = file.readlines()
-        line_count = len(lines)
-        word_count = sum(len(line.split()) for line in lines)
-        char_count = sum(len(line) for line in lines)
-    return line_count, word_count, char_count
-
-
-file_path = 'sample.txt'
-lines, words, characters = count_text_file(file_path)
-print(f'Lines: {lines}, Words: {words}, Characters: {characters}')
-   
-#writing and then reading a file
-with open ('sample.txt','w+')as file:
-    file.write('hello world\n')
-    file.write('this is my new line\n')
-
-    #move the file cursor to the begining
-    file.seek(0)
-
-    #read the content of the file 
-    content.file.read()
+    a=b
     print(content)
-
-#create a new directory
-import os
-cwd=os.getcwd()
-print(f"current working directory is {cwd}")
-
-new_directory="package"
-os.mkdir(new_directory)
-print(f"directory'{new_directory}'create")
-
-#listing file and directies
-items=os.listdir('.')
-print(items)
-
-#joining paths
-dir_name="folder"
-file_name="file.txt"
-full_path=os.path.join(dir_name,file_name)
-print(full_path)
-
-#joining file with same directory
-dir_name="folder"
-file_name="file.txt"
-full_path=os.path.join(os.getcwd(),dir_name,file_name)
-print(full_path)
-
-#check the path is exists
-path='example.csv'
-if os.path.exists(path):
-    print(f"the path '{path}' is exists")
-else:
-    print(f"the path '{path}' does not exists")
-
-#checking if path is a file or directory
-import os
-path='example.bin'
-if os.path.isfile(path):
-    print(f"the path '{path}' is a file.")
-elif os.path.isdir(path):
-    print(f"the path '{path}' is a directory.")
-else:
-    print(f"the path '{path}' is neither a file or directory.")
-
-#getting a absolute path
-relative_path='example.txt'
-absolute_path=os.path.abspath(relative_path)
-print(absolute_path)
-
+except FileNotFoundError:
+    print("the file doesnot get exists")
+except Exception as ex:
+    print(ex)
+finally:
+    if 'file' in locals() and not file.closed():
+        file.close()
+        print('file close')
