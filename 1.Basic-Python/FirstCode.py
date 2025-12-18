@@ -25,6 +25,5 @@ dog1=dog()
 cat1=cat()
 print(dog1.speak())
 print(cat1.speak())
-animal_speak(dog) 
-
-#polymorphism with functions and methods
+animal_speak(dog)
+  
