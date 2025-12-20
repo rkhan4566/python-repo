@@ -26,4 +26,4 @@ cat1=cat()
 print(dog1.speak())
 print(cat1.speak())
 animal_speak(dog)
-  
+  s
