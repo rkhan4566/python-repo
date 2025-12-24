@@ -1,24 +1,36 @@
-#abstraction:-abstraction is the concept of hiding the complex implementation details and showing only the necessary features of the object. 
-#this helps in reducing programing complexity and effort
+#magic method:-Magic Methods
+#Magic methods in Python, also known as dunder methods (double underscore methods), are special methods that start and end with double underscores. These methods enable you to define the behavior of objects for built-in operations, such as arithmetic operations, comparisons, and more.
+#Magic Methods:-
+#Magic methods are predefined methods in Python that you can override to change the behavior of your objects. Some common magic methods include:
+#__init__: Initializes a new instance of a class.
+#__str__: Returns a string representation of an object.
+#__repr__: Returns an official string representation of an object.
 
-from abc import ABC,abstractmethod
-#abstract base class
-class Vehicle(ABC):
-    def drive(self):
-        print("the vehicle is used for driving")
+class Person:
+     pass
 
-    @abstractmethod
-    def start_engine(self):
-        pass
+person=Person
+print(dir(person))
 
-class Car(Vehicle):
-    def start_engine(self):
-        print("car engine start")
+#basic methods
+class Person:
+     def __init__(self,name,age):
+         self.name=name
+         self.age=age
+         
+person=Person("rehan",19)
+print(person)
 
-def operate_vehicle(vehicle):
-        vehicle.start_engine()
-        vehicle.drive()
-car=Car()
-operate_vehicle(car)
-
-
+#
+class Person:
+    def __init__(self,name,age):
+        self.name=name
+        self.age=age
+    def __str__(self):
+        return f"{self.name}, {self.age} years old"
+    def __repr__(self):
+        return f"person(name={self.name},age={self.age}"
+    
+person=Person("rehan",19)
+print(person)
+print(repr(person))
