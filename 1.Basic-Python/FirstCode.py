@@ -1,36 +1,86 @@
-#magic method:-Magic Methods
-#Magic methods in Python, also known as dunder methods (double underscore methods), are special methods that start and end with double underscores. These methods enable you to define the behavior of objects for built-in operations, such as arithmetic operations, comparisons, and more.
-#Magic Methods:-
-#Magic methods are predefined methods in Python that you can override to change the behavior of your objects. Some common magic methods include:
-#__init__: Initializes a new instance of a class.
-#__str__: Returns a string representation of an object.
-#__repr__: Returns an official string representation of an object.
+#Operator Overloading
+#Operator overloading allows you to define the behavior of operators (+, -, *, etc.) for custom objects. You achieve this by overriding specific magic methods in your class.
+#Common Operator Overloading Magic Methods
 
-class Person:
-     pass
+# __add__(self, other): Adds two objects using the + operator.
+# __sub__(self, other): Subtracts two objects using the - operator.
+# __mul__(self, other): Multiplies two objects using the * operator.
+# __truediv__(self, other): Divides two objects using the / operator.
+# __eq__(self, other): Checks if two objects are equal using the == operator.
+# __lt__(self, other): Checks if one object is less than another using the < operator.
 
-person=Person
-print(dir(person))
+class Vector:
+    def __init__(self,x,y):
+        self.x=x
+        self.y=y
 
-#basic methods
-class Person:
-     def __init__(self,name,age):
-         self.name=name
-         self.age=age
-         
-person=Person("rehan",19)
-print(person)
-
-#
-class Person:
-    def __init__(self,name,age):
-        self.name=name
-        self.age=age
-    def __str__(self):
-        return f"{self.name}, {self.age} years old"
-    def __repr__(self):
-        return f"person(name={self.name},age={self.age}"
+    def __add__(self,other):
+        return Vector(self.x+other.x,self.y+other.y)
     
-person=Person("rehan",19)
-print(person)
-print(repr(person))
+    def __sub__(self,other):
+        return Vector(self.x-other.x,self.y-other.y)
+    
+    def __mul__(self,other):
+        return Vector(self.x*other.x,self.y*other.y)
+    
+    def __eq__(self,other):
+        return Vector(self.x==other.x,self.y==other.y)
+    
+    def __repr__(self):
+        return f"Vector({self.x},{self.y})"
+    
+v1=Vector(2,3)
+v2=Vector(4,5)
+    
+print(v1 + v2)
+    
+class ComplexNumber:
+    def __init__(self, real, imag):
+        self.real = real
+        self.imag = imag
+
+    def __add__(self, other):
+        return ComplexNumber(
+            self.real + other.real,
+            self.imag + other.imag
+        )
+
+    def __sub__(self, other):
+        return ComplexNumber(
+            self.real - other.real,
+            self.imag - other.imag
+        )
+
+    def __mul__(self, other):
+        real_part = self.real * other.real - self.imag * other.imag
+        imag_part = self.real * other.imag + self.imag * other.real
+        return ComplexNumber(real_part, imag_part)
+
+    def __truediv__(self, other):
+        denominator = other.real**2 + other.imag**2
+        real_part = (
+            self.real * other.real + self.imag * other.imag
+        ) / denominator
+        imag_part = (
+            self.imag * other.real - self.real * other.imag
+        ) / denominator
+        return ComplexNumber(real_part, imag_part)
+
+    def __eq__(self, other):
+        return self.real == other.real and self.imag == other.imag
+
+    def __repr__(self):
+        return f"{self.real} + {self.imag}i"
+
+
+# Create objects
+c1 = ComplexNumber(2, 3)
+c2 = ComplexNumber(1, 4)
+
+# Use overloaded operators
+print(c1 + c2)   # Output: 3 + 7i
+print(c1 - c2)   # Output: 1 - 1i
+print(c1 * c2)   # Output: -10 + 11i
+print(c1 / c2)   # Output: 0.8235294117647058 - 0.29411764705882354i
+print(c1 == c2)  # Output: False
+
