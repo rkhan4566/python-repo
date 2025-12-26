@@ -1,18 +1,28 @@
-#custom exception(raise and throw an exception)
-class error(Exception):
-    pass
+#iterators:- 
 
-class dobexception(error):
-    pass
+#iterators are advanced python concepts that allows for efficient looping and memory management.
+# iterators provide a way to access elements of a collections sequentially without exposing the underlying structure.
 
-year=int(input("entre your DOB"))
-age=2025-year
+my_list=[1,2,3,4,5,6]
+for i in my_list:
+    print(i)
+
+print(type(my_list))
+print(my_list)
+
+iterator=iter(my_list)
+print(type(my_list))
+iterator
+ 
+print(next(iterator))
+
 try:
-    if age>=20 and age<=30:
-        print("you are egligible to cxam")
-    else:
-        raise dobexception
-except dobexception:
-    print("you are not egligible for exam")
-
-    
+    print(next(iterator))
+    print(next(iterator))
+    print(next(iterator))
+    print(next(iterator))
+    print(next(iterator))
+    print(next(iterator))
+    print(next(iterator))
+except StopIteration:
+    print("there will be not iterate")
