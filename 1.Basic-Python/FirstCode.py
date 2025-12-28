@@ -1,36 +1,63 @@
-#generators:-
-#Generators are a simpler way to create iterators. They use the yield keyword to produce a series of values lazily, which means they generate values on the fly and do not store them in memory.
+#Decorators:-
+#Decorators are a powerful and flexible feature in Python that allows you to modify the behavior of a function or class method.
+# They are commonly used to add functionality to functions or methods without modifying their actual code.
+# This lesson covers the basics of decorators, including how to create and use them.
 
-def square(n):
-    for i in range(3):
-        yield i**2
-        
-print(square(3))
+#Python
+## function copy
+## closures
+## decorators
 
-for i in square(3):
-    print(i)
+#function copy:-
+def welcome():
+    return "welcome to advanced python course"
 
-def my_generator():
-    yield 1
-    yield 2
-    yield 3
+print(welcome())
 
-gen=my_generator()
-print(next(gen))
-print(next(gen))
-print(next(gen))
-print(next(gen))
+wel=welcome()
+print(wel)
 
-for val in gen:
-    print(val)
+del welcome
+print(wel)
 
-#practicle example:-reading large file
-def read_large_file(file_path):
-    with open(file_path,'r') as file:
-        for line in file:
-            yield line
+#closers:-
+def main_welcome():
+    msg='welcome'
+    def sub_welcome_method():
+        print("welcome to the advanced python course")
+        print(msg)
+        print("please learn these concepts properly")
+    return sub_welcome_method()
 
-file_path='sample.txt'
-for line in read_large_file(file_path):
-    print(line.strip())
+print(main_welcome())
 
+#closers function
+def main_welcome(msg):
+   
+    def sub_welcome_method():
+        print("welcome to the advanced python course")
+        print(msg)
+        print("please learn these concepts properly")
+    return sub_welcome_method()
+
+print(main_welcome("welcome everyone"))
+
+def main_welcome(func):
+    def sub_welcome_method():
+        print("welcome to the advanced python course")
+        func("welcome everyone to this tutorial")
+        print("please learn these concepts properly")
+    return sub_welcome_method()
+
+main_welcome(print)
+
+def main_welcome(func,lst):
+    def sub_welcome_method():
+        print("welcome to the advanced python course")
+        print(func(lst))
+        print("please learn these concepts properly")
+    return sub_welcome_method()
+
+print(main_welcome(len,[1,2,3,4,5]))
+
+#decorators:-
