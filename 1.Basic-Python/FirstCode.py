@@ -51,3 +51,37 @@ data=[
 df=pd.DataFrame(data)
 print(df)
 print(type(df))
+
+df=pd.read_csv('sample.txt')
+print(df)
+print(type(df))
+
+a=df.tail(3)
+print(a)
+
+### Accessing data from dataframe
+"""print(df.loc[1])
+print(df.iloc[1][2])"""
+
+## Accessing a specified element
+"""a=df.at[2,'name']
+print(a)"""
+
+##adding a column
+c=df['salary']=[500000,60000,70000]
+print(c)
+
+##removing a column 
+c=df.drop('salary')
+print(c)
+
+# display the data types of each column
+print("data types:\n",df.dtypes)
+
+#describe the dataframe
+print("statistiacal summary:\n",df.describe())
+
+#group by a column anf perform an aggregation
+grouped=df.groupby('catagory')['value'].mena()
+print("mean value by category:\n",grouped)
+
