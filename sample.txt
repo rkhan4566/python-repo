@@ -6,3 +6,5 @@ i am so glad to learn python
 python is a high level programming language
 python
 done
+10
+a
