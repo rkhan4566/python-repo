@@ -40,3 +40,34 @@ df.head()
 df['new value']=df['value'].apply(lambda x:x**2)
 df.head()
 
+#Data aggregating and grouping
+groupred_mean=df.group('product')['value'].mean()
+print(groupred_mean)
+
+grouped_sum=df.groupby(['product','region'])['value'].sum()
+print(grouped_sum)
+
+##Aggregrete multiple functions
+grouped_agg=df.groupby('region')['value'].agg(['mean','sum','count'])
+print(grouped_agg)
+
+#Merging and joining Dataframes
+#####create sample dataframes###
+import pandas as pd
+df1=pd.DataFrame({'key':['A','B','C'],'value1':[1,2,3]})
+df2=pd.DataFrame({'key':['A','B','D'],'values2':[4,5,6]})
+print(df1)
+print(df2)
+
+#merge dataframe on the 'keycolumn'
+a=pd.merge(df1,df2,on="key",how="inner")
+print(a)
+
+b=pd.merge(df1,df2,on="key",how="outer")
+print(b)
+
+c=pd.merge(df1,df2,on="key",how="left")
+print(c)
+
+d=pd.merge(df1,df2,on="key",how="right")
+print(d)
