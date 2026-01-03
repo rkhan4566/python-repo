@@ -1,73 +1,29 @@
-#Data manipuloation and analysis with pandas
-#data manipulation and analysis are key tasks in any data science or data analysis project.
-#pandas provides a wide range of function for data manipulation and analysis=,making it easier to clean,transform,and extract.
-#insights from data.in the lession,we will cover variousd data manipulation and analysis techniques usinig pandas.
-
+###READING DATA FROM DIFFERENT SOUCES
 import pandas as pd
-df=pd.read_csv('sample.txt')
-print(df)
-#fetch the first row line
-a=df.head(5)
-a=df.tail(5)
-a=df.describe()
+from io import StringIO
+Data='{"employee_name": "james","emails":"james@gmail.com","job_profile": [{"title1":"team Lead","title2":"sr. developer"}]}'
+df=pd.read_json(StringIO(Data))
+print(df)           
+
+a=df.to_json(orient='index')
 print(a)
 
-b=df.isnull()
-print(b)
-b=df.isnull().any()
+b=df.to_json(orient='records')
 print(b)
 
-b=df.isnull().sum()
+df=pd.read_csv("https://archive.ics.uci.edu/dataset/186/wine+quality",header=None)
+print(df.head())
+
+df.to_csv("wine.csv")
+
+url="https://fdic.gov/bank-failures/failed-bank-list"
+df=pd.read_html(url)
 print(df)
- 
-df_filled=df.fillna(0)
+df[0]
 
-# ISKE NICHE JO YE SAB JO CODE LIKHA HUA H YE SAB UDEMY KA APNA CODE H Q KI WO APNA FILE SE COPY PASTE KR KE 
-# BANAYA H JISME HM SIRF CODE SIKHE H NA KI KOI CODING 
+pd.read_excel('data.xlsx')
 
-#filling missing values with the mean of the column
-df['sales_fillNA']=df['sales'].filling(df['sales'].mean())
+df_excel.to_pickle('df_excel')
 
-#Renaming columns
-df=df.rename(columns={'sales date':'sales date'})
-df.head()
-print(df)
+pd.read_pickle('df_excel')
 
-#change datatypes
-df['value_new']=df['value'].fillna(df['value'].mean()).astype(int)
-df.head()
-
-df['new value']=df['value'].apply(lambda x:x**2)
-df.head()
-
-#Data aggregating and grouping
-groupred_mean=df.group('product')['value'].mean()
-print(groupred_mean)
-
-grouped_sum=df.groupby(['product','region'])['value'].sum()
-print(grouped_sum)
-
-##Aggregrete multiple functions
-grouped_agg=df.groupby('region')['value'].agg(['mean','sum','count'])
-print(grouped_agg)
-
-#Merging and joining Dataframes
-#####create sample dataframes###
-import pandas as pd
-df1=pd.DataFrame({'key':['A','B','C'],'value1':[1,2,3]})
-df2=pd.DataFrame({'key':['A','B','D'],'values2':[4,5,6]})
-print(df1)
-print(df2)
-
-#merge dataframe on the 'keycolumn'
-a=pd.merge(df1,df2,on="key",how="inner")
-print(a)
-
-b=pd.merge(df1,df2,on="key",how="outer")
-print(b)
-
-c=pd.merge(df1,df2,on="key",how="left")
-print(c)
-
-d=pd.merge(df1,df2,on="key",how="right")
-print(d)
