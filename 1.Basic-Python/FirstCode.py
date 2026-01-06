@@ -1,77 +1,131 @@
-#DATA VISUALIZATION WITH SEABORN
+# SQL And SQLite:-
+#SQL (Structured Query Language) is a standard language for managing and manipulating relational databases.
+#SQLite is a self-contained, serverless, and zero-configuration database engine that is widely used for embedded database systems.
+#In this lesson, we will cover the basics of SQL and SQLite, including creating databases, tables, and performing various SQL operations.
 
-# Seaborn is a Python visualization library based on Matplotlib that provides
-#  a high-level interface for drawing attractive and informative statistical graphics.
-#  Seaborn helps in creating complex visualizations with just a few lines of code.
-#  In this lesson, we will cover the basics of Seaborn, including creating various types of plots and customizing them.
+import sqlite3
 
-import seaborn as sns
-##basics plottong with seaborn
-tips=sns.load_dataset('tips')
-print(tips)
+# connect and SQLite database
+connection=sqlite3.connect('example.db')
+print(connection)
 
-#create a scatter plot
-import matplotlib.pyplot as plt
-sns.scatterplot(x='total_bill',y='tip',data=tips)
-plt.title("scatter plot of total bill vs tip")
-plt.show()
+cursor=connection.cursor()
+#create a table
+cursor.execute('''
+Create Table If Not Exists employees(
+    id integer primary key,
+    name text not null,
+    age integer,
+    department text
+    ) 
+''')
+#commit the changes
+connection.commit()
 
-#line plot
-sns.lineplot(x='size',y='total_bill',data=tips)
-plt.title('line plot of total bills by size')
-plt.show()
 
-#categorical variable
-#bar plot 
-sns.barplot(x='day',y='total_bill',data=tips)
-plt.title('bar plot of total bill by day')
-plt.show()
+###          1.  
 
-#box plot
-sns.boxplot(x='day',y='total_bill',data=tips)
-plt.show()
+cursor.execute('''
+select * from employees
+     
+''')
 
-#violin plot
-sns.violinplot(x='day',y='total_bill',data=tips)
-plt.show()
+#insert the data in sqlite table
+cursor.execute('''
+insert into employees(name,age,department)
+               values('rehan',19,'EEE')
+''')
 
-###histogram
-sns.histplot(tips['total_bill'],bins=10,kde=True)
-plt.show()
+cursor.execute('''
+insert into employees(name,age,department)
+               values('abutalha',19,'EE')
+''')
 
-#KDE plot
-sns.kdeplot(tips['total_bill'],fill=True)
-plt.show()
+cursor.execute('''
+insert into employees(name,age,department)
+               values('rkhan',19,'CSE')
+''')
 
-#pair plot
-sns.pairplot(tips)
-plt.show()
+#commit the changes
+connection.commit()
 
-#heatmap
-corr=tips[['total_bill','tip','size']].corr()
-print(corr)
+#query the data from the table
+cursor.execute('select * from employees')
+rows=cursor.fetchall()
 
-sns.heatmap(corr,annot=True,cmap='coolwarm')
-plt.show()
+#print the query data
+for row in rows:
+    print(row)
 
-##    YAHA SE UDEMY APNA WALA FOLDER KA CODE PUT KIYA H JIISE RUN KRNE PR ERROR BATAYGTA   ##
 
-import pandas as pd
-sales_df=pd.read_csv('sales_data.csv')
-sales_df.head()
+###             2.
 
-##plot total sales of product
-plt.figure(figsize=(10,6))
-sns.barplot(x='product category',y='total revenue',data=sales_df,estimator=sum)
-plt.title('total sales by product')
-plt.xlable('product')
-plt.ylabel('total sales')
-plt.show()
+#update the data into table
+cursor.execute('''
+UPDATE employees 
+set age=20
+where name is "rehan"             
+''')
 
-# plot total plot by region
-plt.figure(figsize=(10,6))
-sns.barplot(x='region',y='total revenue',data=sales_df,estimator=sum)
-plt.title('total sales by region')
-plt.xlable('region')
-plt.ylabel('total sales')
-plt.show()
+connection.commit()
+
+#delete the data from the table
+cursor.execute('''
+delete from employees
+               where name is "abutalha"
+
+''')
+
+#query the data from the table
+cursor.execute('select * from employees')
+rows=cursor.fetchall()
+
+#print the query data
+for row in rows:
+    print(row)
+
+###            3.
+
+import sqlite3
+#working with sales data
+##connection to an SQLlite data base
+connection=sqlite3.connect('sales_data.db')
+cursor=connection.cursor()
+
+#reate a table from sales data
+cursor.execute("""
+CREATE TABLE IF NOT EXISTS sales (
+    id INTEGER PRIMARY KEY,
+    date TEXT NOT NULL,
+    product TEXT NOT NULL,
+    sales INTEGER,
+    region TEXT
+)
+""")
+
+# Insert data into the sales table
+sales_data = [
+    ('2023-01-01', 'Product1', 100, 'North'),
+    ('2023-01-02', 'Product2', 200, 'South'),
+    ('2023-01-03', 'Product1', 150, 'East'),
+    ('2023-01-04', 'Product3', 250, 'West'),
+    ('2023-01-05', 'Product2', 300, 'North')
+]
+
+cursor.executemany('''
+insert into sales (date,product,sales,region)
+                   values(?,?,?,?)
+
+''',sales_data)
+
+connection.commit()
+
+cursor.execute('select * from sales')
+rows=cursor.fetchall()
+
+#print the query data
+for row in rows:
+    print(row)
+
+#closed the connection
+connection.close()
