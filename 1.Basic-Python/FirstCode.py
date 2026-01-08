@@ -1,51 +1,26 @@
-#Python Logging
-#Logging is a crucial aspect of any application,
-#  providing a way to track events, errors, and operational information.
-#  Python’s built-in logging module offers a flexible framework for emitting log messages from Python programs.
-#  In this lesson, we will cover the basics of logging, including how to configure logging, log levels, and best practices for using logging in Python applications.
-
-import logging 
-
-#configure the basics logging settings
-logging.basicConfig(level=logging.DEBUG)
-
-##log messege
-logging.debug("this is debug messege")
-logging.info("this is info messege")
-logging.warning("this is the warning messege")
-logging.error("this is an error messege")
-logging.critical("this is a critical messege")
-
-#configuring logging
+#logging with multiple loggers
+#you can create multiple loggers for different parts of your application
 import logging
+##create a logger for module1
+logger1=logging.getLogger("module1")
+logger1.setLevel(logging.DEBUG)
 
+#create a logger for multiple2
+logger2=logging.getLogger("module2")
+logger2.setLevel(logging.WARNING)
+
+#configure logging settings
 logging.basicConfig(
-    filename='app.log',
-    filemode='w',
-    level=logging.DEBUG,
-    format='%(asctime)s-%(levelname)s-%(messege)s',
-    datefmt='%Y-%M-%d %H:%M:%S'
+level=logging.DEBUG,
+format='%(asctime)s-%(name)s - %(levelname)s - %(message)s',
+datefmt='%Y-%M-%d %H:%M:%S'
+
+
+
 )
-##logging messege with different severity levels
-logging.debug("this is debug messege")
-logging.info("this is info messege")
-logging.warning("this is the warning messege")
-logging.error("this is an error messege")
-logging.critical("this is a critical messege")
+#log messege with different loggers
+logger1.debug("this is a debug messege")
+logger2.warning("this is a warning messege for module2")
+logger2.error("this is a error messege")
 
 
-import logging
-
-logging.basicConfig(
-    filename='app.log',
-    filemode='w',
-    level=logging.DEBUG,
-    format='%(asctime)s - %(levelname)s - %(message)s',
-    datefmt='%Y-%m-%d %H:%M:%S'
-)
-
-logging.debug("this is debug message")
-logging.info("this is info message")
-logging.warning("this is the warning message")
-logging.error("this is an error message")
-logging.critical("this is a critical message")
