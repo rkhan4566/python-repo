@@ -1,26 +1,86 @@
-#logging with multiple loggers
-#you can create multiple loggers for different parts of your application
-import logging
-##create a logger for module1
-logger1=logging.getLogger("module1")
-logger1.setLevel(logging.DEBUG)
+"""import logging
+## logging setting
 
-#create a logger for multiple2
-logger2=logging.getLogger("module2")
-logger2.setLevel(logging.WARNING)
-
-#configure logging settings
 logging.basicConfig(
-level=logging.DEBUG,
-format='%(asctime)s-%(name)s - %(levelname)s - %(message)s',
-datefmt='%Y-%M-%d %H:%M:%S'
-
-
-
+        level=logging.DEBUG,
+        format='%(asctime)s - %(name)s- %(levelname)s -%(messege)s',
+        datefmt='%Y-%M-%d %H:%M:%S',
+        handlers=[
+            logging.FileHandler("app.log"),
+            logging.StreamHandler()
+        ]
 )
-#log messege with different loggers
-logger1.debug("this is a debug messege")
-logger2.warning("this is a warning messege for module2")
-logger2.error("this is a error messege")
+logger=logging.getLogger("ArithmaticApp")
+
+def add(a,b):
+    result=a+b
+    logger.debug(f"adding {a} + {b}={result}")
+    return result
+
+def substract(a,b):
+    result=a-b
+    logger.debug(f"substaction {a} - {b}={result}")
+    return result
+
+def multiply(a,b):
+    result=a*b
+    logger.debug(f"multiply {a} * {b}={result}")
+    return result
+
+def divide(a,b):
+    try:
+        result=a/b
+        logger.debug(f"divide {a} / {b}={result}")
+        return result
+    except ZeroDivisionError:
+        logger.error("division by zero error")
+        return None
+    
+add(10,15)
+substract(15,10)
+multiply(10,20)
+divide(20,10)
+"""
+import logging
+
+logging.basicConfig(
+    level=logging.DEBUG,
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+    handlers=[
+        logging.FileHandler("app.log"),
+        logging.StreamHandler()
+    ]
+)
+
+logger = logging.getLogger("ArithmeticApp")
+
+def add(a, b):
+    result = a + b
+    logger.debug(f"add {a} + {b} = {result}")
+    return result
+
+def substract(a, b):
+    result = a - b
+    logger.debug(f"substract {a} - {b} = {result}")
+    return 
+
+def multiply(a, b):
+    result = a * b
+    logger.debug(f"multiply {a} * {b} = {result}")
+    return result
+
+def divide(a, b):
+    result = a / b
+    logger.debug(f"divide {a} / {b} = {result}")
+    return result
+
+
+
+if __name__ == "__main__":
+    add(10, 5)
+    divide(20, 10)
+    multiply(10,20)
+    substract(20,10)
+
 
 
