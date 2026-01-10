@@ -1,86 +1,31 @@
-"""import logging
-## logging setting
+#program:- A program is a sequence a instruction return in programming language
+              #eg:- python,c++,java
 
-logging.basicConfig(
-        level=logging.DEBUG,
-        format='%(asctime)s - %(name)s- %(levelname)s -%(messege)s',
-        datefmt='%Y-%M-%d %H:%M:%S',
-        handlers=[
-            logging.FileHandler("app.log"),
-            logging.StreamHandler()
-        ]
-)
-logger=logging.getLogger("ArithmaticApp")
+              #eg:-Google chrome:-exe-> program -> browser should work 
 
-def add(a,b):
-    result=a+b
-    logger.debug(f"adding {a} + {b}={result}")
-    return result
+#process:- A process is a simply an instance of a program that is being executed
 
-def substract(a,b):
-    result=a-b
-    logger.debug(f"substaction {a} - {b}={result}")
-    return result
+#Threads:- A thread is a unit of execution within a process
 
-def multiply(a,b):
-    result=a*b
-    logger.debug(f"multiply {a} * {b}={result}")
-    return result
+### Multithreading
+### when to use multi Threading
+### I/O- bound tasks: Tasks that spend more time waiting for I/O operations (eg:- file operation,network,request).
+### concurrent execution: When you want to improve the thoughtut of the application by performing multiple operation cuncurrently.
 
-def divide(a,b):
-    try:
-        result=a/b
-        logger.debug(f"divide {a} / {b}={result}")
-        return result
-    except ZeroDivisionError:
-        logger.error("division by zero error")
-        return None
-    
-add(10,15)
-substract(15,10)
-multiply(10,20)
-divide(20,10)
-"""
-import logging
+import threading
+import time
+def print_numbers():
+    for i in range(5):
+        print(f"numbers:{i}")
 
-logging.basicConfig(
-    level=logging.DEBUG,
-    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
-    handlers=[
-        logging.FileHandler("app.log"),
-        logging.StreamHandler()
-    ]
-)
+def print_latter():
+    for latter in "abcde":
+        print(f"Latter:{latter}")
 
-logger = logging.getLogger("ArithmeticApp")
-
-def add(a, b):
-    result = a + b
-    logger.debug(f"add {a} + {b} = {result}")
-    return result
-
-def substract(a, b):
-    result = a - b
-    logger.debug(f"substract {a} - {b} = {result}")
-    return 
-
-def multiply(a, b):
-    result = a * b
-    logger.debug(f"multiply {a} * {b} = {result}")
-    return result
-
-def divide(a, b):
-    result = a / b
-    logger.debug(f"divide {a} / {b} = {result}")
-    return result
-
-
-
-if __name__ == "__main__":
-    add(10, 5)
-    divide(20, 10)
-    multiply(10,20)
-    substract(20,10)
-
+t=time.time()
+print_numbers()
+print_latter() 
+finished_time=time.time()-t
+print(finished_time)      
 
 
