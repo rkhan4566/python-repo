@@ -1,45 +1,62 @@
-#program:- A program is a sequence a instruction return in programming language
-              #eg:- python,c++,java
+# Multithreading and Multiprocessing
 
-              #eg:-Google chrome:-exe-> program -> browser should work 
+# Processes that run in parallel
+# CPU-bound tasks - tasks that are heavy on CPU usage (e.g., mathematical computations, data processing)
+# Parallel execution - Multiple cores of the CPU
 
-#process:- A process is a simply an instance of a program that is being executed
-
-#Threads:- A thread is a unit of execution within a process
-
-### Multithreading
-### when to use multi Threading
-### I/O- bound tasks: Tasks that spend more time waiting for I/O operations (eg:- file operation,network,request).
-### concurrent execution: When you want to improve the thoughtut of the application by performing multiple operation cuncurrently.
-
-import threading
+import multiprocessing
 import time
-def print_numbers():
+
+def square_numbers():
     for i in range(5):
-        time.sleep(2)
-        print(f"numbers:{i}")
+        time.sleep(1)
+        print(f"sqare: {i*i}")
 
-def print_letter():
-    for letter in "abcde":
-        time.sleep(2)
-        print(f"Letter:{letter}")
+def cube_numbers():
+    for i in range(5):
+        time.sleep(1.5)
+        print(f"cube: {i*i*i}")
 
-## create two threads
-t1=threading.Thread(target=print_numbers)
-t2=threading.Thread(target=print_letter)
+if __name__=="__main__":
+        
+    #create 2 processes
+    p1=multiprocessing.Process(target=square_numbers)
+    p2=multiprocessing.Process(target=cube_numbers)
+    t=time.time()
 
-t=time.time()
-# start the thread
-t1.start()
-t2.start()
+    #start the process
+    p1.start()
+    p2.start()
 
-t=time.time() 
-#wait for the threads to complete
-t1.join()
-t2.join()
+    #wait for the process to complete
+    p1.join()
+    p2.join()
 
-finished_time=time.time()-t
-print(finished_time)
+    finished_time=time.time()-t
+    print(finished_time)
 
 
+from multiprocessing import Process, Queue
+import time
 
+def square(q):
+    for i in range(4):
+        q.put(i)
+        time.sleep(1)
+
+def cube(q):
+    for _ in range(4):
+        i = q.get()
+        print(f"square: {i*i}")
+        print(f"cube: {i*i*i}")
+
+if __name__ == "__main__":
+    q = Queue()
+    p1 = Process(target=square, args=(q,))
+    p2 = Process(target=cube, args=(q,))
+
+    p1.start()
+    p2.start()
+
+    p1.join()
+    p2.join()
