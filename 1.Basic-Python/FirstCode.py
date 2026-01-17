@@ -1,62 +1,29 @@
-# Multithreading and Multiprocessing
+#multithreading with thread pool executor
+from concurrent.futures import ThreadPoolExecutor
+import time
+def print_number(numbers):
+    time.sleep(1)
+    return f"number :{numbers}"
 
-# Processes that run in parallel
-# CPU-bound tasks - tasks that are heavy on CPU usage (e.g., mathematical computations, data processing)
-# Parallel execution - Multiple cores of the CPU
+numbers=[1,2,3,4,5,6,7,8,9,10]
 
-import multiprocessing
+with ThreadPoolExecutor(max_workers=1) as executor:
+    results=executor.map(print_number,numbers)
+    for result in results:
+        print(result)
+
+##multiprocessing with processpoolexecutor
+from concurrent.futures import ProcessPoolExecutor
 import time
 
-def square_numbers():
-    for i in range(5):
-        time.sleep(1)
-        print(f"sqare: {i*i}")
+def square_number(number):
+    time.sleep(1)
+    return f"square: {number*number}"
 
-def cube_numbers():
-    for i in range(5):
-        time.sleep(1.5)
-        print(f"cube: {i*i*i}")
-
+numbers=[1,2,3,4,5,6,7,8,9]
 if __name__=="__main__":
-        
-    #create 2 processes
-    p1=multiprocessing.Process(target=square_numbers)
-    p2=multiprocessing.Process(target=cube_numbers)
-    t=time.time()
+    with ProcessPoolExecutor(max_workers=3) as executor:
+        results=executor.map(square_number,numbers)
 
-    #start the process
-    p1.start()
-    p2.start()
-
-    #wait for the process to complete
-    p1.join()
-    p2.join()
-
-    finished_time=time.time()-t
-    print(finished_time)
-
-
-from multiprocessing import Process, Queue
-import time
-
-def square(q):
-    for i in range(4):
-        q.put(i)
-        time.sleep(1)
-
-def cube(q):
-    for _ in range(4):
-        i = q.get()
-        print(f"square: {i*i}")
-        print(f"cube: {i*i*i}")
-
-if __name__ == "__main__":
-    q = Queue()
-    p1 = Process(target=square, args=(q,))
-    p2 = Process(target=cube, args=(q,))
-
-    p1.start()
-    p2.start()
-
-    p1.join()
-    p2.join()
+    for result in results:
+        print(result)
