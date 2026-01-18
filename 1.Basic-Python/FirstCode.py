@@ -1,29 +1,44 @@
-#multithreading with thread pool executor
-from concurrent.futures import ThreadPoolExecutor
-import time
-def print_number(numbers):
-    time.sleep(1)
-    return f"number :{numbers}"
+"""
+Real-World Example: Multithreading for I/O-bound Tasks
+Scenario: Web Scraping
+Web scraping often involves making numerous network requests to
+fetch web pages. These tasks are I/O-bound because they spend a lot of
+time waiting for responses from servers. Multithreading can significantly
+improve the performance by allowing multiple web pages to be fetched concurrently.
+"""
+'''
+https://docs.langchain.com/oss/python/langchain/overview
 
-numbers=[1,2,3,4,5,6,7,8,9,10]
+https://docs.langchain.com/oss/python/langchain/philosophy
 
-with ThreadPoolExecutor(max_workers=1) as executor:
-    results=executor.map(print_number,numbers)
-    for result in results:
-        print(result)
+https://docs.langchain.com/oss/python/releases/changelog
+'''
 
-##multiprocessing with processpoolexecutor
-from concurrent.futures import ProcessPoolExecutor
-import time
+import threading
+import requests
+from bs4 import BeautifulSoup
 
-def square_number(number):
-    time.sleep(1)
-    return f"square: {number*number}"
+urls=[
+'https://docs.langchain.com/oss/python/langchain/overview',
 
-numbers=[1,2,3,4,5,6,7,8,9]
-if __name__=="__main__":
-    with ProcessPoolExecutor(max_workers=3) as executor:
-        results=executor.map(square_number,numbers)
+'https://docs.langchain.com/oss/python/langchain/philosophy',
 
-    for result in results:
-        print(result)
+'https://docs.langchain.com/oss/python/releases/changelog'
+
+]
+def fetch_content(url):
+    response=requests.get(url)
+    soup=BeautifulSoup(response.content,'html.parser')
+    print(f'fetched{len(soup.text)} character from {url}')
+
+threads=[]
+for url in urls:
+    thread=threading.Thread(target=fetch_content,args=(url,))
+    threads.append(thread)
+    thread.start()
+
+for thread in threads:
+    thread.join()
+
+print("all web pages fetched")
+
