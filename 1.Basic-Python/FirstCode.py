@@ -1,44 +1,77 @@
-"""
-Real-World Example: Multithreading for I/O-bound Tasks
-Scenario: Web Scraping
-Web scraping often involves making numerous network requests to
-fetch web pages. These tasks are I/O-bound because they spend a lot of
-time waiting for responses from servers. Multithreading can significantly
-improve the performance by allowing multiple web pages to be fetched concurrently.
-"""
-'''
-https://docs.langchain.com/oss/python/langchain/overview
+# Requirements:
+# Multithreading and Multiprocessing
 
-https://docs.langchain.com/oss/python/langchain/philosophy
+# Real-World Example: Multiprocessing for CPU-bound Tasks
+# Scenario: Factorial Calculation
+# Factorial calculations, especially for large numbers,
+# involve significant computational work. Multiprocessing
+# can be used to distribute the workload across multiple
+# CPU cores, improving performance.
 
-https://docs.langchain.com/oss/python/releases/changelog
-'''
+##LAPTOP LAG KAR RHA H Q KI BIG NUMBERS KA FACTORIAL KAR RHE H ISLIYE
 
-import threading
-import requests
-from bs4 import BeautifulSoup
+import multiprocessing
+import math
+import sys
+import time
 
-urls=[
-'https://docs.langchain.com/oss/python/langchain/overview',
 
-'https://docs.langchain.com/oss/python/langchain/philosophy',
+#increase the maxium number of digits for integer conversion
+sys.set_int_max_str_digits(10000)
 
-'https://docs.langchain.com/oss/python/releases/changelog'
+##function to compute factorial of a given numbers
+def computer_factorial(number):
+    print(f"computing factorial {number}")
+    result=math.factorial(number)
+    print(f"factorial of {number} is {result}")
 
-]
-def fetch_content(url):
-    response=requests.get(url)
-    soup=BeautifulSoup(response.content,'html.parser')
-    print(f'fetched{len(soup.text)} character from {url}')
+if __name__=="__main__":
+    numbers=[5000,6000,7000,8000]
+    start_time=time.time()
 
-threads=[]
-for url in urls:
-    thread=threading.Thread(target=fetch_content,args=(url,))
-    threads.append(thread)
-    thread.start()
+#create a pool of worker processes
+with multiprocessing.Pool() as pool:
+    results=pool.map(computer_factorial,numbers)
 
-for thread in threads:
-    thread.join()
+end_time=time.time()
+print(f"results:{results}")
+print(f"time taken:{end_time - start_time} seconds")
 
-print("all web pages fetched")
+import multiprocessing
+import math
+import time
 
+def computer_factorial(number):
+    print(f"Computing factorial of {number}")
+    result = math.factorial(number)
+    return len(str(result))   # sirf digits count return
+
+if __name__ == "__main__":
+    numbers = [5000, 6000, 7000, 8000]
+    start_time = time.time()
+
+    with multiprocessing.Pool() as pool:
+        results = pool.map(computer_factorial, numbers)
+
+    end_time = time.time()
+    print("Digits in factorials:", results)
+    print(f"Time taken: {end_time - start_time} seconds")
+
+## YHA SE CODE SHI H RUN KRNE LAYAK    
+
+import multiprocessing
+import math
+import time
+
+def computer_factorial(n):
+    return len(str(math.factorial(n)))
+
+if __name__ == "__main__":
+    numbers = [1000, 1200, 1500]
+    start = time.time()
+
+    with multiprocessing.Pool(processes=2) as pool:
+        results = pool.map(computer_factorial, numbers)
+
+    print("Digits:", results)
+    print("Time:", time.time() - start)
