@@ -1,77 +1,123 @@
-# Requirements:
-# Multithreading and Multiprocessing
+## PYTHON MEMORY MANAGEMENT
 
-# Real-World Example: Multiprocessing for CPU-bound Tasks
-# Scenario: Factorial Calculation
-# Factorial calculations, especially for large numbers,
-# involve significant computational work. Multiprocessing
-# can be used to distribute the workload across multiple
-# CPU cores, improving performance.
+## Memory management in Python involves a combination of automatic garbage collection,
+# reference counting, and various internal optimizations to efficiently manage memory allocation and deallocation. Understanding these mechanisms can help developers write more efficient and robust applications.
+# 1.Key Concepts in Python Memory Management
+# 2.Memory Allocation and Deallocation
+# 3.Reference Counting
+# 4.Garbage Collection
+# 5.The gc Module
+# 6.Memory Management Best Practices
 
-##LAPTOP LAG KAR RHA H Q KI BIG NUMBERS KA FACTORIAL KAR RHE H ISLIYE
+## REFERENCE COUNTING
+# reference counting is the primary method python uses to manage memory.
+# Each object in python maintain a count of reference pointing to it.
+# when the reference pointing to it when the reference output drops to zero.
+# the memory occupied by the object is dealloated.
 
-import multiprocessing
-import math
 import sys
-import time
+a=[]
+## 2 (one reference from 'a' and one from getrecount())
+print(sys.getrefcount(a))
+
+b=a
+print(sys.getrefcount(b))
+
+del b
+print(sys.getrefcount(b))
+
+#GARBAGE COLLECTION
+
+#Python includes a cyclic garbage collector to handle reference cycles.
+#Reference cycles occur when objects reference each other, preventing
+#their reference counts from reaching zero. 
+
+import gc
+## enable garbage collection
+gc.enable()
+
+gc.disable()
+
+gc.collect()
+
+print(gc.get_stats())
+
+print(gc.garbage)
+
+##Memory Management Best Practices
+#Use Local Variables:
+#Local variables have a shorter lifespan and are freed sooner than global variables.
+#Avoid Circular References:
+#Circular references can lead to memory leaks if not properly managed.
+#Use Generators:
+#Generators produce items one at a time and only keep one item in memory at a time, making them memory efficient.
+#Explicitly Delete Objects:
+#Use the del statement to delete variables and objects explicitly.
+#Profile Memory Usage:
+#Use memory profiling tools like tracemalloc and memory_profiler to identify memory leaks and optimize memory usage
+
+import gc
+class myObject:
+    def __init__(self,name):
+        self.name=name
+        print(f"object {self.name} created")
+
+    def __del__(self):
+        print(f"object {self.name} deleted")
+
+#create circular reference
+obj1=myObject("obj1")
+obj2=myObject("obj2")
+obj1.ref=obj2
+obj2.ref=obj1
+
+del obj1
+del obj2
+
+##manually trigger garbage collection
+gc.collect()
+
+#print collected objects
+print(f"garbage collected objects: {gc.garbage}")
+
+#generators for memory efficiency
+#generators allow you to produce items one at a times one at a time,using memory efficiently by only keeping one item
+
+def generate_numbers(n):
+    for i in range (n):
+        yield i
+
+#using generators 
+for num in generate_numbers(100000):
+    print(num)
+    if num>10:
+        break
+
+#rofiling memory usage with tracemalloc
+import tracemalloc
+
+def create_list():
+    return [i for i in range(10000)]
+
+def main():
+    tracemalloc.start()
+
+    create_list()
+
+    snapsshot = tracemalloc.take_snapshot()
+    top_stats = snapsshot.statistics('lineno') 
+
+    print("[top 10]")
+    for stat in top_stats[::]:
+        print(stat) 
+
+main()
 
 
-#increase the maxium number of digits for integer conversion
-sys.set_int_max_str_digits(10000)
 
-##function to compute factorial of a given numbers
-def computer_factorial(number):
-    print(f"computing factorial {number}")
-    result=math.factorial(number)
-    print(f"factorial of {number} is {result}")
 
-if __name__=="__main__":
-    numbers=[5000,6000,7000,8000]
-    start_time=time.time()
 
-#create a pool of worker processes
-with multiprocessing.Pool() as pool:
-    results=pool.map(computer_factorial,numbers)
 
-end_time=time.time()
-print(f"results:{results}")
-print(f"time taken:{end_time - start_time} seconds")
 
-import multiprocessing
-import math
-import time
 
-def computer_factorial(number):
-    print(f"Computing factorial of {number}")
-    result = math.factorial(number)
-    return len(str(result))   # sirf digits count return
 
-if __name__ == "__main__":
-    numbers = [5000, 6000, 7000, 8000]
-    start_time = time.time()
-
-    with multiprocessing.Pool() as pool:
-        results = pool.map(computer_factorial, numbers)
-
-    end_time = time.time()
-    print("Digits in factorials:", results)
-    print(f"Time taken: {end_time - start_time} seconds")
-
-## YHA SE CODE SHI H RUN KRNE LAYAK    
-
-import multiprocessing
-import math
-import time
-
-def computer_factorial(n):
-    return len(str(math.factorial(n)))
-
-if __name__ == "__main__":
-    numbers = [1000, 1200, 1500]
-    start = time.time()
-
-    with multiprocessing.Pool(processes=2) as pool:
-        results = pool.map(computer_factorial, numbers)
-
-    print("Digits:", results)
-    print("Time:", time.time() - start)
