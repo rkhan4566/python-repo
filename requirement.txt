@@ -6,6 +6,5 @@ seaborn
 flask
 memory_profiler
 streamlit
-scikit-learn
-bs4
-requests
+
+
