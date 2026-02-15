@@ -1,29 +1,52 @@
 import streamlit as st
 import pandas as pd
+from sklearn.datasets import load_iris
+from sklearn.ensemble import RandomForestClassifier
 
-st.title("Streamlit Text Input")
-name=st.text_input("enter your name")
-age=st.slider("select your age",0,100,25)
-st.write(f"your age is {age}.")
+@st.cache_data
+def load_data():
+    iris=load_iris()
+    df=pd.DataFrame(iris.data,columns=iris.feature_names)
+    df['species']=iris.target
+    return df,iris.target_names
 
-options=["python","java","c++","javaScript"]
-choice = st.selectbox("choose your favorite language:",options)
-st.write(f"you selected {choice}.")
+df,target_names=load_data()
 
-if name:
-    st.write(f"hello, {name}")
+model=RandomForestClassifier()
+model.fit(df.iloc[:, :-1], df['species'])
 
-data={
-    "name": ["john","jane","jake","jilli"],
-    "age": [28,47,48,24],
-    "City":["muri","silli","ranchi","jkharkhand"]
-}
+st.sidebar.title("Input Features")
 
-df=pd.DataFrame(data)
-df.to_csv("sampledata.csv")
-st.write(df)
+sepal_length = st.sidebar.slider(
+    "Sepal length",
+    float(df['sepal length (cm)'].min()),
+    float(df['sepal length (cm)'].max())
+)
 
-uploaded_file=st.file_uploader("choose a CSV file",type="csv")
-if uploaded_file is not None:
-    df=pd.read_csv(uploaded_file)
-    st.write(df)
+sepal_width = st.sidebar.slider(
+    "Sepal width",
+    float(df['sepal width (cm)'].min()),
+    float(df['sepal width (cm)'].max())
+)
+
+petal_length = st.sidebar.slider(
+    "Petal length",
+    float(df['petal length (cm)'].min()),
+    float(df['petal length (cm)'].max())
+)
+
+petal_width = st.sidebar.slider(
+    "Petal width",
+    float(df['petal width (cm)'].min()),
+    float(df['petal width (cm)'].max())
+)
+
+input_data = [[sepal_length, sepal_width, petal_length, petal_width]]
+
+# Prediction
+prediction = model.predict(input_data)
+predicted_species = target_names[prediction[0]]
+
+st.write("prediction")
+st.write("the Predicted Species is:", predicted_species)
+
