@@ -1,0 +1,14 @@
+2026-01-07 20:43:01 - DEBUG - this is debug message
+2026-01-07 20:43:01 - INFO - this is info message
+2026-01-07 20:43:01 - WARNING - this is the warning message
+2026-01-07 20:43:01 - ERROR - this is an error message
+2026-01-07 20:43:01 - CRITICAL - this is a critical message
+2026-01-09 21:48:44,150 - ArithmeticApp - DEBUG - add 10 + 5 = 15
+2026-01-09 21:48:44,187 - ArithmeticApp - DEBUG - divide 20 / 10 = 2.0
+2026-01-09 21:51:37,846 - ArithmeticApp - DEBUG - add 10 + 5 = 15
+2026-01-09 21:51:37,847 - ArithmeticApp - DEBUG - divide 20 / 10 = 2.0
+2026-01-09 21:51:37,847 - ArithmeticApp - DEBUG - multiply 10 * 20 = 200
+2026-01-09 21:51:47,753 - ArithmeticApp - DEBUG - add 10 + 5 = 15
+2026-01-09 21:51:47,754 - ArithmeticApp - DEBUG - divide 20 / 10 = 2.0
+2026-01-09 21:51:47,757 - ArithmeticApp - DEBUG - multiply 10 * 20 = 200
+2026-01-09 21:51:47,758 - ArithmeticApp - DEBUG - substract 20 - 10 = 10
